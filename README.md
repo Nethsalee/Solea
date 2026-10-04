@@ -102,13 +102,80 @@ images: {
 
 Customize colors, fonts, and other design tokens in `tailwind.config.ts`.
 
+## 📚 Documentation
+
+- [Project Structure](docs/PROJECT_STRUCTURE.md) - Detailed folder and file organization
+- [API Documentation](docs/API.md) - API routes and endpoints
+- [Deployment Guide](docs/DEPLOYMENT.md) - How to deploy to various platforms
+- [Features](docs/FEATURES.md) - Current and planned features
+- [Contributing](CONTRIBUTING.md) - How to contribute to the project
+- [Changelog](CHANGELOG.md) - Version history and updates
+
+## 🧪 Development
+
+### Available Scripts
+
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+npm run lint:fix     # Fix ESLint errors
+npm run format       # Format code with Prettier
+npm run format:check # Check code formatting
+npm run type-check   # Run TypeScript type checking
+```
+
+### Project Structure
+
+```
+├── app/              # Next.js pages and routes
+├── components/       # Reusable React components
+├── data/             # Static and mock data
+├── docs/             # Documentation files
+├── hooks/            # Custom React hooks
+├── lib/              # Utility functions
+├── public/           # Static assets
+└── types/            # TypeScript definitions
+```
+
+## 🔒 Environment Variables
+
+Copy `.env.local.example` to `.env.local` and fill in your values:
+
+```bash
+cp .env.local.example .env.local
+```
+
+Required variables:
+- `NEXT_PUBLIC_APP_URL` - Your application URL
+- Database credentials (if using)
+- Payment gateway keys (Stripe)
+- Email service credentials
+
+## 🚀 Deployment
+
+See the [Deployment Guide](docs/DEPLOYMENT.md) for detailed instructions on deploying to:
+- Vercel (recommended)
+- Netlify
+- Docker
+- Self-hosted
+
 ## 📝 License
 
-ISC
+ISC - See [LICENSE](LICENSE) file for details
+
+## 🤝 Contributing
+
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## 👨‍💻 Author
 
-Created as a capstone project demonstrating modern web development practices.
+Created as a capstone project demonstrating modern web development practices with Next.js, TypeScript, and Tailwind CSS.
+
+## 📧 Contact
+
+For questions or feedback, please open an issue on GitHub.
 
 ---
 

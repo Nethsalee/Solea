@@ -113,6 +113,7 @@ export default function Home() {
             src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=1920&h=1080&fit=crop"
             alt="Hero Background"
             fill
+            sizes="100vw"
             className="object-cover opacity-90"
             priority
           />
@@ -173,6 +174,7 @@ export default function Home() {
                 src={category.image}
                 alt={category.title}
                 fill
+                sizes="(max-width: 768px) 100vw, 33vw"
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -262,11 +264,12 @@ export default function Home() {
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="relative h-[500px] bg-neutral-100">
+          <div className="relative h-[500px] bg-neutral-100">
               <Image
                 src="https://images.unsplash.com/photo-1556906781-9a412961c28c?w=800&h=1000&fit=crop"
                 alt="Built for Everyday"
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
               />
             </div>

@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+
+# Disallow admin and api routes
+Disallow: /api/
+Disallow: /admin/
+
+# Sitemap
+Sitemap: https://www.solea.com/sitemap.xml
