@@ -3,44 +3,158 @@
 import Link from "next/link";
 import { useState } from "react";
 
+const footerLinks = {
+  shop: [
+    { href: "/men", label: "Men" },
+    { href: "/women", label: "Women" },
+    { href: "/new-arrivals", label: "New Arrivals" },
+    { href: "/collections", label: "Collections" },
+    { href: "/archived", label: "Archived" },
+    { href: "/sale", label: "Sale" },
+  ],
+  about: [
+    { href: "/our-story", label: "Our Story" },
+    { href: "/sustainability", label: "Sustainability" },
+    { href: "/materials", label: "Materials" },
+    { href: "/press", label: "Press" },
+  ],
+  support: [
+    { href: "/shipping", label: "Shipping & Returns" },
+    { href: "/order-tracking", label: "Order Tracking" },
+    { href: "/size-guide", label: "Size Guide" },
+    { href: "/contact", label: "Contact Us" },
+  ],
+};
+
+const socialLinks = [
+  { href: "#", label: "Instagram", short: "Ig" },
+  { href: "#", label: "TikTok", short: "Tk" },
+  { href: "#", label: "Pinterest", short: "Pt" },
+  { href: "#", label: "Spotify", short: "Sp" },
+];
+
 export default function Footer() {
   const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Subscribed with email: ${email}`);
-    setEmail("");
+    if (email) {
+      setSubscribed(true);
+      setEmail("");
+      setTimeout(() => setSubscribed(false), 3000);
+    }
   };
 
   return (
-    <footer className="bg-neutral-100 pt-16 pb-8">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
-          {/* Brand Section */}
-          <div className="lg:col-span-2">
-            <h3 className="text-xl font-bold mb-4">SOLEA ASICHIN</h3>
-            <p className="text-sm text-gray-600 mb-6 max-w-md">
-              Contemporary footwear engineered for everyday movement and aesthetic clarity. Designed for
-              those who embrace both form and function in Stockholm.
+    <footer className="footer" role="contentinfo">
+      <div className="container">
+        {/* Top Grid */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "2fr 1fr 1fr 1fr",
+            gap: "48px",
+            marginBottom: "64px",
+          }}
+          className="footer-grid"
+        >
+          {/* Brand Column */}
+          <div>
+            {/* Logo */}
+            <div
+              style={{
+                fontFamily: "'Outfit', sans-serif",
+                fontSize: "1.8rem",
+                fontWeight: 900,
+                letterSpacing: "-0.04em",
+                background: "linear-gradient(135deg, #fff 0%, #6c63ff 60%, #43e8ff 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                marginBottom: "16px",
+              }}
+            >
+              SOLEA
+            </div>
+
+            <p
+              style={{
+                fontSize: "0.88rem",
+                color: "var(--text-muted)",
+                lineHeight: "1.8",
+                maxWidth: "300px",
+                marginBottom: "32px",
+              }}
+            >
+              Contemporary footwear engineered for everyday movement and aesthetic
+              clarity. Designed for those who embrace both form and function.
             </p>
+
+            {/* Newsletter in footer */}
             <div>
-              <h4 className="text-xs font-semibold mb-3 uppercase tracking-wider">
-                Newsletter Subscription
+              <h4
+                style={{
+                  fontSize: "0.72rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.15em",
+                  textTransform: "uppercase",
+                  color: "var(--text-primary)",
+                  marginBottom: "12px",
+                }}
+              >
+                Newsletter
               </h4>
-              <form onSubmit={handleSubscribe} className="flex gap-2">
+              <form
+                onSubmit={handleSubscribe}
+                style={{ display: "flex", gap: "0" }}
+                aria-label="Footer newsletter subscription"
+              >
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email address"
-                  className="flex-1 px-4 py-2 border border-gray-300 text-sm focus:outline-none focus:border-black"
+                  placeholder="Your email address"
+                  style={{
+                    flex: 1,
+                    padding: "11px 18px",
+                    borderRadius: "10px 0 0 10px",
+                    border: "1px solid var(--glass-border)",
+                    background: "rgba(255,255,255,0.04)",
+                    color: "var(--text-primary)",
+                    fontSize: "0.83rem",
+                    outline: "none",
+                    fontFamily: "inherit",
+                    transition: "border-color 0.3s",
+                  }}
+                  onFocus={(e) => (e.target.style.borderColor = "rgba(108,99,255,0.5)")}
+                  onBlur={(e) => (e.target.style.borderColor = "var(--glass-border)")}
                   required
+                  id="footer-newsletter-email"
+                  aria-label="Email address for newsletter"
                 />
                 <button
                   type="submit"
-                  className="bg-black text-white px-6 py-2 text-sm font-medium hover:bg-gray-800 transition-colors"
+                  style={{
+                    padding: "11px 20px",
+                    borderRadius: "0 10px 10px 0",
+                    border: "none",
+                    background: "linear-gradient(135deg, #6c63ff, #43e8ff)",
+                    color: "#fff",
+                    fontSize: "0.78rem",
+                    fontWeight: 700,
+                    letterSpacing: "0.06em",
+                    textTransform: "uppercase",
+                    cursor: "pointer",
+                    fontFamily: "inherit",
+                    transition: "opacity 0.3s",
+                    whiteSpace: "nowrap",
+                  }}
+                  aria-label="Subscribe to newsletter"
+                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
+                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
                 >
-                  JOIN
+                  {subscribed ? "✓ Joined!" : "Join"}
                 </button>
               </form>
             </div>
@@ -48,135 +162,154 @@ export default function Footer() {
 
           {/* Shop Links */}
           <div>
-            <h4 className="text-sm font-semibold mb-4 uppercase tracking-wider">Shop</h4>
-            <ul className="space-y-3 text-sm text-gray-600">
-              <li>
-                <Link href="/men" className="hover:text-black">
-                  Men
-                </Link>
-              </li>
-              <li>
-                <Link href="/women" className="hover:text-black">
-                  Women
-                </Link>
-              </li>
-              <li>
-                <Link href="/new-arrivals" className="hover:text-black">
-                  New Arrivals
-                </Link>
-              </li>
-              <li>
-                <Link href="/collections" className="hover:text-black">
-                  Collections
-                </Link>
-              </li>
-              <li>
-                <Link href="/archived" className="hover:text-black">
-                  Archived
-                </Link>
-              </li>
-              <li>
-                <Link href="/sale" className="hover:text-black">
-                  Sale
-                </Link>
-              </li>
+            <h4
+              style={{
+                fontSize: "0.72rem",
+                fontWeight: 700,
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                color: "var(--text-primary)",
+                marginBottom: "20px",
+              }}
+            >
+              Shop
+            </h4>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "12px" }}>
+              {footerLinks.shop.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="footer-link">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* About Links */}
           <div>
-            <h4 className="text-sm font-semibold mb-4 uppercase tracking-wider">About</h4>
-            <ul className="space-y-3 text-sm text-gray-600">
-              <li>
-                <Link href="/our-story" className="hover:text-black">
-                  Our Story
-                </Link>
-              </li>
-              <li>
-                <Link href="/sustainability" className="hover:text-black">
-                  Sustainability
-                </Link>
-              </li>
-              <li>
-                <Link href="/materials" className="hover:text-black">
-                  Materials
-                </Link>
-              </li>
-              <li>
-                <Link href="/press" className="hover:text-black">
-                  Press
-                </Link>
-              </li>
+            <h4
+              style={{
+                fontSize: "0.72rem",
+                fontWeight: 700,
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                color: "var(--text-primary)",
+                marginBottom: "20px",
+              }}
+            >
+              About
+            </h4>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "12px" }}>
+              {footerLinks.about.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="footer-link">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Customer Service Links */}
+          {/* Support Links */}
           <div>
-            <h4 className="text-sm font-semibold mb-4 uppercase tracking-wider">
-              Customer Service
+            <h4
+              style={{
+                fontSize: "0.72rem",
+                fontWeight: 700,
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                color: "var(--text-primary)",
+                marginBottom: "20px",
+              }}
+            >
+              Support
             </h4>
-            <ul className="space-y-3 text-sm text-gray-600">
-              <li>
-                <Link href="/shipping" className="hover:text-black">
-                  Shipping & Returns
-                </Link>
-              </li>
-              <li>
-                <Link href="/order-tracking" className="hover:text-black">
-                  Order Tracking
-                </Link>
-              </li>
-              <li>
-                <Link href="/size-guide" className="hover:text-black">
-                  Size Guide
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-black">
-                  Contact Us
-                </Link>
-              </li>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "12px" }}>
+              {footerLinks.support.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="footer-link">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
-        {/* Social Links */}
-        <div className="border-t border-gray-300 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-6">
-              <Link href="#" className="hover:opacity-70">
-                <span className="text-sm">Instagram</span>
-              </Link>
-              <Link href="#" className="hover:opacity-70">
-                <span className="text-sm">TikTok</span>
-              </Link>
-              <Link href="#" className="hover:opacity-70">
-                <span className="text-sm">Pinterest</span>
-              </Link>
-              <Link href="#" className="hover:opacity-70">
-                <span className="text-sm">Spotify Music</span>
-              </Link>
-            </div>
+        {/* Divider */}
+        <div className="glow-divider" style={{ marginBottom: "32px" }} />
 
-            <div className="flex items-center gap-4 text-sm text-gray-600">
-              <Link href="/privacy" className="hover:text-black">
-                Privacy
-              </Link>
-              <Link href="/terms" className="hover:text-black">
-                Terms
-              </Link>
-              <Link href="/cookies" className="hover:text-black">
-                Cookies
-              </Link>
-              <span>UNITED STATES (USD $)</span>
-            </div>
+        {/* Bottom Bar */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+            gap: "24px",
+          }}
+        >
+          {/* Copyright */}
+          <p
+            style={{
+              fontSize: "0.78rem",
+              color: "var(--text-muted)",
+              letterSpacing: "0.03em",
+            }}
+          >
+            © 2025 SOLEA FOOTWEAR LLC. ALL RIGHTS RESERVED.
+          </p>
+
+          {/* Social icons */}
+          <div style={{ display: "flex", gap: "10px" }} aria-label="Social media links">
+            {socialLinks.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                className="social-icon"
+                aria-label={social.label}
+                title={social.label}
+              >
+                {social.short}
+              </a>
+            ))}
           </div>
 
-          <div className="text-center md:text-left mt-6 text-xs text-gray-500">
-            © 2025 SOLEA FOOTWEAR LLC. ALL RIGHTS RESERVED.
+          {/* Legal links */}
+          <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
+            {[
+              { href: "/privacy", label: "Privacy" },
+              { href: "/terms", label: "Terms" },
+              { href: "/cookies", label: "Cookies" },
+            ].map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                style={{
+                  fontSize: "0.78rem",
+                  color: "var(--text-muted)",
+                  textDecoration: "none",
+                  transition: "color 0.3s",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent-primary)")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>
+
+      {/* Responsive overrides */}
+      <style>{`
+        @media (max-width: 1024px) {
+          .footer-grid { grid-template-columns: 1fr 1fr !important; }
+        }
+        @media (max-width: 640px) {
+          .footer-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </footer>
   );
 }

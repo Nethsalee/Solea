@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 
@@ -23,20 +25,21 @@ export default function ProductCard({
   badge,
 }: ProductCardProps) {
   return (
-    <Link href={`/product/${id}`} className="group">
-      <div className="relative bg-neutral-100 mb-4 overflow-hidden aspect-square">
+    <Link href={`/product/${id}`} className="product-card" aria-label={`${name} - $${price}`}>
+      {/* Image Container */}
+      <div className="product-image-wrapper">
         {badge && (
-          <span className="absolute top-3 left-3 bg-black text-white text-xs px-3 py-1 z-10 uppercase tracking-wide">
+          <span className="product-badge" aria-label={`Badge: ${badge}`}>
             {badge}
           </span>
         )}
-        <button className="absolute top-3 right-3 z-10 hover:scale-110 transition-transform">
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
+
+        <button
+          className="product-wishlist-btn"
+          aria-label={`Add ${name} to wishlist`}
+          onClick={(e) => { e.preventDefault(); }}
+        >
+          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -45,34 +48,43 @@ export default function ProductCard({
             />
           </svg>
         </button>
-        <div className="w-full h-full relative">
-          <Image
-            src={image}
-            alt={name}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-        </div>
+
+        <Image
+          src={image}
+          alt={name}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          className="product-img"
+        />
+
+        <button
+          className="product-quick-add"
+          onClick={(e) => { e.preventDefault(); }}
+          aria-label={`Quick add ${name} to cart`}
+        >
+          + Quick Add
+        </button>
       </div>
-      <div>
-        <div className="flex justify-between items-start mb-1">
+
+      {/* Product Info */}
+      <div className="product-info">
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
           <div>
-            <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">
-              {category}
-            </p>
-            <h3 className="font-semibold text-sm group-hover:underline">{name}</h3>
+            <p className="product-category">{category}</p>
+            <h3 className="product-name">{name}</h3>
+            <p className="product-desc">{description}</p>
           </div>
-          <p className="font-semibold text-sm">${price}</p>
+          <p className="product-price">${price}</p>
         </div>
-        <p className="text-xs text-gray-600 mb-2">{description}</p>
-        <div className="flex gap-2">
+
+        <div className="product-colors" role="group" aria-label={`${name} color options`}>
           {colors.map((color, index) => (
             <button
               key={index}
-              className="w-4 h-4 rounded-full border border-gray-300"
+              className="color-dot"
               style={{ backgroundColor: color }}
-              title={color}
+              aria-label={`Color option ${index + 1}`}
+              onClick={(e) => { e.preventDefault(); }}
             />
           ))}
         </div>
