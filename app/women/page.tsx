@@ -60,15 +60,25 @@ export default function WomenPage() {
       {/* Main Content */}
       <div className="container mx-auto px-4 py-16 md:py-20">
         {/* Header Section */}
-        <div className="mb-16 text-center md:text-left max-w-4xl">
-          <p className="text-xs uppercase tracking-widest text-olive-600 mb-3 font-bold">
-            WOMEN'S FOOTWEAR
-          </p>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight tracking-tight">
-            WOMEN'S COLLECTION
+        <div className="mb-20 max-w-5xl">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="h-px w-12 bg-olive-600"></div>
+            <p className="text-xs uppercase tracking-[0.2em] text-olive-600 font-bold">
+              WOMEN'S FOOTWEAR
+            </p>
+          </div>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-[1.1] tracking-tight text-gray-900">
+            Women's
+            <br />
+            <span className="bg-gradient-to-r from-olive-700 via-tan-600 to-stone-700 bg-clip-text text-transparent">
+              Collection
+            </span>
           </h1>
-          <p className="text-gray-600 text-base leading-relaxed">
-            Thoughtfully crafted footwear that blends style, comfort, and sustainability. 
+          <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-3xl font-light">
+            Thoughtfully crafted footwear that blends{" "}
+            <span className="text-olive-700 font-medium">style</span>,{" "}
+            <span className="text-olive-700 font-medium">comfort</span>, and{" "}
+            <span className="text-olive-700 font-medium">sustainability</span>. 
             Every design is engineered for the modern woman who values both aesthetics and functionality.
           </p>
         </div>
