@@ -8,7 +8,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="max-w-xl">
             <p className="text-sm uppercase tracking-wider text-gray-600 mb-4">
-              NEW COLLECTION 2025
+              NEW COLLECTION 2026
             </p>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
               STEP INTO

@@ -172,19 +172,19 @@
 - Cart and wishlist
 - Responsive design
 
-### Phase 2: Commerce (Q1 2025)
+### Phase 2: Commerce (Q1 2026)
 - User authentication
 - Checkout process
 - Payment integration
 - Order management
 
-### Phase 3: Engagement (Q2 2025)
+### Phase 3: Engagement (Q2 2026)
 - Product reviews
 - Search functionality
 - Personalization
 - Email marketing
 
-### Phase 4: Scale (Q3 2025)
+### Phase 4: Scale (Q3 2026)
 - Admin dashboard
 - Analytics
 - Performance optimization

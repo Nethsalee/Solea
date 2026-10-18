@@ -108,7 +108,7 @@ const bestSellers = [
 
 const marqueeItems = [
   "Free Shipping Over $100",
-  "New Collection 2025",
+  "New Collection 2026",
   "Designed in Stockholm",
   "Premium Materials",
   "30-Day Free Returns",
@@ -254,7 +254,7 @@ export default function Home() {
             <div>
               <div className="hero-badge animate-fade-up">
                 <span className="hero-badge-dot" />
-                New Collection 2025
+                New Collection 2026
               </div>
 
               <h1 className="hero-title animate-fade-up delay-100">

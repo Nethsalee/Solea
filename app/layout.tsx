@@ -9,7 +9,7 @@ const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit", weight: [
 
 export const metadata: Metadata = {
   title: "SOLEA — Step Into Your Style | Premium Footwear",
-  description: "Contemporary footwear designed for everyday movement and aesthetic clarity. Discover the new 2025 collection — engineered in Stockholm.",
+  description: "Contemporary footwear designed for everyday movement and aesthetic clarity. Discover the new 2026 collection — engineered in Stockholm.",
   keywords: "SOLEA, premium footwear, shoes, sneakers, contemporary, Stockholm",
 };
 

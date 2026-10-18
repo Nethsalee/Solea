@@ -257,7 +257,7 @@ export default function Footer() {
               letterSpacing: "0.03em",
             }}
           >
-            © 2025 SOLEA FOOTWEAR LLC. ALL RIGHTS RESERVED.
+            © 2026 SOLEA FOOTWEAR LLC. ALL RIGHTS RESERVED.
           </p>
 
           {/* Social icons */}
