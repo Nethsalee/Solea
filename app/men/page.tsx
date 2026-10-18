@@ -43,42 +43,29 @@ const menProducts = [
 
 export default function MenPage() {
   return (
-    <div className="min-h-screen bg-white" style={{ paddingTop: "120px" }}>
-      {/* Breadcrumb */}
-      <div className="border-b border-gray-200 bg-white">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center gap-2 text-sm text-gray-600">
-            <Link href="/" className="hover:text-olive-700 transition-colors">
-              HOME
-            </Link>
-            <span>/</span>
-            <span className="text-olive-700 font-medium">MEN</span>
-          </div>
-        </div>
-      </div>
-
+    <div className="min-h-screen bg-white" style={{ paddingTop: "90px" }}>
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-16 md:py-20">
+      <div className="container mx-auto px-4 py-12 md:py-16">
         {/* Header Section */}
-        <div className="mb-20 max-w-5xl">
-          <div className="flex items-center gap-3 mb-6">
+        <div className="mb-16 max-w-5xl">
+          <div className="flex items-center gap-3 mb-4">
             <div className="h-px w-12 bg-olive-600"></div>
             <p className="text-xs uppercase tracking-[0.2em] text-olive-600 font-bold">
               MEN'S FOOTWEAR
             </p>
           </div>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 leading-[1.1] tracking-tight text-gray-900">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-[1.1] tracking-tight text-gray-900">
             Men's
             <br />
             <span className="bg-gradient-to-r from-olive-700 via-tan-600 to-stone-700 bg-clip-text text-transparent">
               Collection
             </span>
           </h1>
-          <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-3xl font-light">
+          <p className="text-gray-700 text-base md:text-lg leading-relaxed max-w-2xl" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
             Engineered footwear designed for{" "}
-            <span className="text-olive-700 font-medium">movement</span>,{" "}
-            <span className="text-olive-700 font-medium">performance</span>, and{" "}
-            <span className="text-olive-700 font-medium">everyday style</span>. 
+            <span className="text-olive-700 font-semibold">movement</span>,{" "}
+            <span className="text-olive-700 font-semibold">performance</span>, and{" "}
+            <span className="text-olive-700 font-semibold">everyday style</span>. 
             Built with premium materials and contemporary design principles for the modern man.
           </p>
         </div>
