@@ -99,7 +99,7 @@ export default function Footer() {
                   fontWeight: 700,
                   letterSpacing: "0.15em",
                   textTransform: "uppercase",
-                  color: "var(--text-primary)",
+                  color: "#ffffff",
                   marginBottom: "12px",
                 }}
               >
@@ -168,7 +168,7 @@ export default function Footer() {
                 fontWeight: 700,
                 letterSpacing: "0.15em",
                 textTransform: "uppercase",
-                color: "var(--text-primary)",
+                color: "#ffffff",
                 marginBottom: "20px",
               }}
             >
@@ -193,7 +193,7 @@ export default function Footer() {
                 fontWeight: 700,
                 letterSpacing: "0.15em",
                 textTransform: "uppercase",
-                color: "var(--text-primary)",
+                color: "#ffffff",
                 marginBottom: "20px",
               }}
             >
@@ -218,7 +218,7 @@ export default function Footer() {
                 fontWeight: 700,
                 letterSpacing: "0.15em",
                 textTransform: "uppercase",
-                color: "var(--text-primary)",
+                color: "#ffffff",
                 marginBottom: "20px",
               }}
             >
