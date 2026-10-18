@@ -43,29 +43,38 @@ const menProducts = [
 
 export default function MenPage() {
   return (
-    <div className="min-h-screen bg-white">
-      <div className="border-b border-gray-200">
+    <div className="min-h-screen bg-white" style={{ paddingTop: "120px" }}>
+      {/* Breadcrumb */}
+      <div className="border-b border-gray-200 bg-white">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center gap-2 text-sm text-gray-600">
-            <Link href="/" className="hover:text-black">
+            <Link href="/" className="hover:text-olive-700 transition-colors">
               HOME
             </Link>
             <span>/</span>
-            <span className="text-black">MEN</span>
+            <span className="text-olive-700 font-medium">MEN</span>
           </div>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-12">
-        <div className="mb-12">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">MEN'S COLLECTION</h1>
-          <p className="text-gray-600 max-w-2xl">
-            Engineered footwear designed for movement, performance, and everyday style. Explore our
-            complete men's range.
+      {/* Main Content */}
+      <div className="container mx-auto px-4 py-16 md:py-20">
+        {/* Header Section */}
+        <div className="mb-16 text-center md:text-left max-w-4xl">
+          <p className="text-xs uppercase tracking-widest text-olive-600 mb-3 font-bold">
+            MEN'S FOOTWEAR
+          </p>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight tracking-tight">
+            MEN'S COLLECTION
+          </h1>
+          <p className="text-gray-600 text-base leading-relaxed">
+            Engineered footwear designed for movement, performance, and everyday style. 
+            Built with premium materials and contemporary design principles for the modern man.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Products Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {menProducts.map((product) => (
             <ProductCard key={product.id} {...product} />
           ))}
