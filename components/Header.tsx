@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useAuth } from "./AuthProvider";
 
 export default function Header() {
+  const { user } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -72,11 +74,11 @@ export default function Header() {
             </button>
 
             {/* Account */}
-            <button className="nav-icon-btn hidden md:flex" aria-label="My account">
+            <Link href="/login" className="nav-icon-btn hidden md:flex" aria-label={user ? "My account, signed in" : "Sign in"}>
               <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
-            </button>
+            </Link>
 
             {/* Mobile Menu Toggle */}
             <button
@@ -151,7 +153,7 @@ export default function Header() {
 
           {/* Links */}
           <nav style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "28px" }}>
-            {navLinks.map((link, i) => (
+            {[...navLinks, { href: "/login", label: user ? "My Account" : "Sign In" }].map((link, i) => (
               <Link
                 key={link.href}
                 href={link.href}
