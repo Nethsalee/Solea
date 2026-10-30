@@ -4,6 +4,7 @@ import Link from "next/link";
 import { products } from "@/data/products";
 import ProductCard from "./ProductCard";
 import Reveal from "./Reveal";
+import { EditorialHero, EditorialStory } from "./CatalogEditorial";
 const departmentProducts = {
  men: ["aero-runner", "urban-flex", "motion-02", "nano-street"],
  women: ["cloud-one", "classic-low", "pace-knit", "sol-terra"],
@@ -25,13 +26,14 @@ export default function Catalog({ sale = false, initialCategory = "", department
  const reset = () => { setCategory(""); setSize(""); setSort("featured"); };
  return <div className="catalog-page"><div className="container">
   <nav className="catalog-breadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span aria-current="page">{pageTitle}</span></nav>
-  <Reveal><header className="catalog-heading"><div><p className="section-label">{label}</p><h1 className="section-title">{heading}</h1></div><p>{description}</p></header></Reveal>
-  <section aria-label={`${pageTitle} footwear`}>
+  {sale ? <Reveal><header className="catalog-heading"><div><p className="section-label">{label}</p><h1 className="section-title">{heading}</h1></div><p>{description}</p></header></Reveal> : <EditorialHero edition={department ?? "arrivals"} />}
+  <section id="footwear" className="editorial-footwear" aria-label={`${pageTitle} footwear`}>
+   {!sale && <Reveal><div className="editorial-grid-heading"><div><p className="section-label">{department === "men" ? "The daily rotation" : department === "women" ? "Considered favourites" : "The latest line-up"}</p><h2 className="section-title">{department === "men" ? "Ready for your everyday." : department === "women" ? "Find your kind of comfort." : "New to the collection."}</h2></div><p>{department === "men" ? "From performance to pavement." : department === "women" ? "Four silhouettes. Endless ways to wear them." : "Meet the styles making their next move."}</p></div></Reveal>}
    <div className="catalog-toolbar"><div className="catalog-controls"><button className="catalog-control" onClick={() => setShowFilters(!showFilters)} aria-expanded={showFilters} aria-controls="catalog-filters">Filters {category || size ? `(${Number(!!category) + Number(!!size)})` : "+"}</button><span role="status">{displayed.length} {displayed.length === 1 ? "style" : "styles"}</span></div><label className="catalog-sort">Sort by<select value={sort} onChange={e => setSort(e.target.value)}><option value="featured">Featured</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option></select></label></div>
    {showFilters && <div id="catalog-filters" className="catalog-filters animate-fade-up"><label>Collection<select value={category} onChange={e => setCategory(e.target.value)}><option value="">All collections</option>{categories.map(c => <option key={c}>{c}</option>)}</select></label><label>Size (EU)<select value={size} onChange={e => setSize(e.target.value)}><option value="">All sizes</option>{[...new Set(source.flatMap(p => p.sizes))].sort().map(s => <option key={s}>{s}</option>)}</select></label><button className="catalog-control" onClick={reset}>Clear filters</button></div>}
    <div className="catalog-products">{displayed.map((p, i) => <Reveal key={p.id} delay={i * 80}><ProductCard id={p.id} name={p.name} category={p.category} description={p.description} price={p.price} salePrice={p.salePrice} colors={p.colors.map(c => c.hex)} image={p.images[0]} badge={sale ? `SAVE ${Math.round((1 - p.salePrice! / p.price) * 100)}%` : p.badge} /></Reveal>)}</div>
    {!displayed.length && <div className="catalog-empty"><h2>No styles match your selection.</h2><button className="catalog-control" onClick={reset}>Clear filters</button></div>}
-  </section><Reveal><div className="catalog-end"><p>{sale ? "Find your next everyday favourite." : "Your next chapter starts here."}</p><Link className="btn-ghost" href="/collections">Explore Collections <span aria-hidden="true">↗</span></Link></div></Reveal>
+  </section>{!sale && <EditorialStory edition={department ?? "arrivals"} />}<Reveal><div className="catalog-end"><p>{sale ? "Find your next everyday favourite." : "Your next chapter starts here."}</p><Link className="btn-ghost" href="/collections">Explore Collections <span aria-hidden="true">↗</span></Link></div></Reveal>
  </div></div>;
 }
 
