@@ -9,6 +9,7 @@ interface ProductCardProps {
   category: string;
   description: string;
   price: number;
+  salePrice?: number;
   colors: string[];
   image: string;
   badge?: string;
@@ -20,12 +21,13 @@ export default function ProductCard({
   category,
   description,
   price,
+  salePrice,
   colors,
   image,
   badge,
 }: ProductCardProps) {
   return (
-    <Link href={`/product/${id}`} className="product-card" aria-label={`${name} - $${price}`}>
+    <Link href={`/product/${id}`} className="product-card" aria-label={`${name} - $${salePrice ?? price}`}>
       {/* Image Container */}
       <div className="product-image-wrapper">
         {badge && (
@@ -74,7 +76,7 @@ export default function ProductCard({
             <h3 className="product-name">{name}</h3>
             <p className="product-desc">{description}</p>
           </div>
-          <p className="product-price">${price}</p>
+          <p className="product-price">{salePrice !== undefined ? <><del className="catalog-original-price">${price}</del><span className="catalog-sale-price">${salePrice}</span></> : <>${price}</>}</p>
         </div>
 
         <div className="product-colors" role="group" aria-label={`${name} color options`}>
