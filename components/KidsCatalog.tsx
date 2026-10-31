@@ -1,0 +1,25 @@
+"use client";
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { kidsProducts } from "@/data/kids";
+import ProductCard from "./ProductCard";
+import Reveal from "./Reveal";
+
+export default function KidsCatalog() {
+  const [category, setCategory] = useState("");
+  const [size, setSize] = useState("");
+  const [sort, setSort] = useState("featured");
+  const displayed = kidsProducts.filter(p => (!category || p.category === category) && (!size || p.sizes.includes(size))).sort((a, b) => sort === "low" ? a.price - b.price : sort === "high" ? b.price - a.price : 0);
+  return <div className="catalog-page kids-page"><div className="container">
+    <nav className="catalog-breadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span aria-current="page">Kids</span></nav>
+    <Reveal><header className="kids-hero"><div className="kids-hero-copy"><p className="section-label">SOLEA / The little explorers</p><h1>Small steps.<br /><em>Big adventures.</em></h1><p>From playground plans to weekend wanderings. Find their next everyday pair, in a collection made for little personalities.</p><a href="#kids-footwear" className="btn-primary">Explore the kids’ edit ↗</a><div className="kids-hero-notes"><span>EU 24–36</span><span>Everyday & playtime</span></div></div><Link href="/kids/mini-runner" className="kids-hero-photo"><Image src={kidsProducts[0].images[0]} alt="Mini Runner from the SOLEA kids’ footwear edit" fill priority sizes="(max-width: 800px) 100vw, 50vw" /><span className="kids-hero-sticker">LET’S<br />GO PLAY.</span><span className="editorial-photo-caption">Meet Mini Runner <span>↗</span></span></Link></header></Reveal>
+    <section id="kids-footwear" className="editorial-footwear" aria-labelledby="kids-footwear-heading"><Reveal><div className="editorial-grid-heading"><div><p className="section-label">Their everyday favourites</p><h2 id="kids-footwear-heading" className="section-title">Ready, set, explore.</h2></div><a href="#kids-fit" className="kids-fit-link">A note on finding their fit ↓</a></div></Reveal>
+      <div className="catalog-toolbar"><div className="kids-tabs" role="group" aria-label="Kids footwear category">{[["", "All styles"], ["EVERYDAY", "Everyday"], ["PLAYTIME", "Playtime"]].map(([value, label]) => <button key={value} className="catalog-control" aria-pressed={category === value} onClick={() => setCategory(value)}>{label}</button>)}</div><div className="catalog-controls"><label className="catalog-sort">Size (EU)<select value={size} onChange={e => setSize(e.target.value)}><option value="">All sizes</option>{Array.from({ length: 13 }, (_, i) => String(i + 24)).map(s => <option key={s}>{s}</option>)}</select></label><label className="catalog-sort">Sort by<select value={sort} onChange={e => setSort(e.target.value)}><option value="featured">Featured</option><option value="low">Price: low to high</option><option value="high">Price: high to low</option></select></label></div></div>
+      <p className="kids-result-count" role="status">{displayed.length} {displayed.length === 1 ? "style" : "styles"}</p><div className="catalog-products">{displayed.map((p, i) => <Reveal key={p.id} delay={i * 80}><ProductCard id={p.id} name={p.name} category={p.category} description={p.description} price={p.price} colors={p.colors.map(c => c.hex)} image={p.images[0]} badge={p.badge} href={`/kids/${p.id}`} /></Reveal>)}</div>
+      {!displayed.length && <div className="catalog-empty"><h2>No styles in this selection.</h2><button className="catalog-control" onClick={() => { setCategory(""); setSize(""); }}>Clear filters</button></div>}
+    </section>
+    <Reveal><section className="kids-fit" id="kids-fit"><div><p className="section-label">Room for the everyday</p><h2>A good day starts<br /><em>with the right fit.</em></h2></div><div><h3>Measure before you choose.</h3><p>Measure both feet while standing and use the larger foot as your starting point. Check the EU size options on each style, and check their fit regularly as they grow.</p><p>Our kids’ edit spans EU 24–36. Available sizes vary by style.</p><a href="#kids-footwear" className="btn-ghost">Find their next pair ↑</a></div></section></Reveal>
+    <div className="catalog-end"><p>Something for the whole family.</p><Link href="/collections" className="btn-ghost">Explore all collections ↗</Link></div>
+  </div></div>;
+}

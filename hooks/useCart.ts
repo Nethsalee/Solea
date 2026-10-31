@@ -9,6 +9,7 @@ const FREE_SHIPPING_THRESHOLD = 150;
 const SHIPPING_COST = 10;
 
 export function useCart() {
+  const [loaded, setLoaded] = useState(false);
   const [cart, setCart] = useState<Cart>({
     items: [],
     subtotal: 0,
@@ -24,12 +25,14 @@ export function useCart() {
       const parsedCart = JSON.parse(savedCart);
       setCart(calculateCartTotals(parsedCart.items));
     }
+    setLoaded(true);
   }, []);
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
+    if (!loaded) return;
     localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
-  }, [cart]);
+  }, [cart, loaded]);
 
   const calculateCartTotals = (items: CartItem[]): Cart => {
     const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);

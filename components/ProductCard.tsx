@@ -13,6 +13,7 @@ interface ProductCardProps {
   colors: string[];
   image: string;
   badge?: string;
+  href?: string;
 }
 
 export default function ProductCard({
@@ -25,9 +26,10 @@ export default function ProductCard({
   colors,
   image,
   badge,
+  href,
 }: ProductCardProps) {
   return (
-    <Link href={`/product/${id}`} className="product-card" aria-label={`${name} - $${salePrice ?? price}`}>
+    <Link href={href ?? `/product/${id}`} className="product-card" aria-label={`${name} - $${salePrice ?? price}`}>
       {/* Image Container */}
       <div className="product-image-wrapper">
         {badge && (

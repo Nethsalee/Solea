@@ -24,6 +24,7 @@ export default function Header() {
     { href: "/", label: "Home" },
     { href: "/men", label: "Men" },
     { href: "/women", label: "Women" },
+    { href: "/kids", label: "Kids" },
     { href: "/shop", label: "New Arrivals" },
     { href: "/collections", label: "Collections" },
     { href: "/sale", label: "Sale" },
@@ -40,7 +41,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex" style={{ gap: "28px", alignItems: "center" }} aria-label="Main navigation">
+          <nav className="hidden md:flex" style={{ gap: "clamp(12px, 1.6vw, 24px)", alignItems: "center" }} aria-label="Main navigation">
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href} className="nav-link">
                 {link.label}

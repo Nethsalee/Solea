@@ -5,6 +5,7 @@ export const metadata = { title: "Collections | SOLEA" };
 const collections = [
  { title: "Men’s", subtitle: "Made for your everyday", image: "photo-1560769629-975ec94e6a86", href: "/men" },
  { title: "Women’s", subtitle: "Effortless by design", image: "photo-1515955656352-a1fa3ffcd111", href: "/women" },
+ { title: "Kids’", subtitle: "Small steps. Big adventures.", image: "photo-1608231387042-66d1773070a5", href: "/kids" },
  { title: "Performance", subtitle: "Find your own pace", image: "photo-1542291026-7eec264c27ff", href: "/shop?category=PERFORMANCE%20SERIES" },
  { title: "Street Lifestyle", subtitle: "A different kind of daily essential", image: "photo-1549298916-b41d501d3772", href: "/shop?category=STREET%20LIFESTYLE" },
 ];
