@@ -24,7 +24,7 @@ export default function Catalog({ sale = false, initialCategory = "", department
  const filtered = source.filter(p => (!category || p.category === category) && (!size || p.sizes.includes(size)));
  const displayed = [...filtered].sort((a, b) => sort === "price-low" ? (a.salePrice ?? a.price) - (b.salePrice ?? b.price) : sort === "price-high" ? (b.salePrice ?? b.price) - (a.salePrice ?? a.price) : 0);
  const reset = () => { setCategory(""); setSize(""); setSort("featured"); };
- return <div className="catalog-page"><div className="container">
+ return <div className={`catalog-page${department === "women" ? " women-page" : ""}`}><div className="container">
   <nav className="catalog-breadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span aria-current="page">{pageTitle}</span></nav>
   {sale ? <Reveal><header className="catalog-heading"><div><p className="section-label">{label}</p><h1 className="section-title">{heading}</h1></div><p>{description}</p></header></Reveal> : <EditorialHero edition={department ?? "arrivals"} />}
   <section id="footwear" className="editorial-footwear" aria-label={`${pageTitle} footwear`}>
@@ -36,4 +36,3 @@ export default function Catalog({ sale = false, initialCategory = "", department
   </section>{!sale && <EditorialStory edition={department ?? "arrivals"} />}<Reveal><div className="catalog-end"><p>{sale ? "Find your next everyday favourite." : "Your next chapter starts here."}</p><Link className="btn-ghost" href="/collections">Explore Collections <span aria-hidden="true">↗</span></Link></div></Reveal>
  </div></div>;
 }
-
