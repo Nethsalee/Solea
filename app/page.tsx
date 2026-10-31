@@ -790,7 +790,7 @@ export default function Home() {
                   ))}
                 </div>
 
-                <Link href="/about" className="btn-ghost" style={{ display: "inline-flex" }}>
+                <Link href="/our-story" className="btn-ghost" style={{ display: "inline-flex" }}>
                   Learn More About Us
                   <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />

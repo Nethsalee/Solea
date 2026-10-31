@@ -8,9 +8,8 @@ const footerLinks = {
     { href: "/men", label: "Men" },
     { href: "/women", label: "Women" },
     { href: "/kids", label: "Kids" },
-    { href: "/new-arrivals", label: "New Arrivals" },
+    { href: "/shop", label: "New Arrivals" },
     { href: "/collections", label: "Collections" },
-    { href: "/archived", label: "Archived" },
     { href: "/sale", label: "Sale" },
   ],
   about: [

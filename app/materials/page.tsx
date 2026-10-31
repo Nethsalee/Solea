@@ -1,0 +1,15 @@
+import AboutShell from "@/components/AboutShell";
+import Reveal from "@/components/Reveal";
+export const metadata = { title: "Materials & Care | SOLEA", description: "Explore SOLEA’s material palette and practical tips for looking after your footwear." };
+const materials = [
+ { number: "01", name: "Mesh & knit", tone: "knit", detail: "Texture, flexibility, and a sporty point of view.", body: "Mesh and knit textures appear throughout athletic footwear. Construction and composition vary between styles, so check the product information for the pair you choose.", care: "Use a soft brush to lift loose dirt. Spot-clean gently and air dry. Avoid soaking unless the product’s care instructions specifically allow it." },
+ { number: "02", name: "Leather & suede", tone: "leather", detail: "Character in the surface. Structure in the shape.", body: "Smooth and textured finishes create different looks and care needs. A leather-look finish is not a guarantee of animal leather; refer to the individual style’s material description.", care: "Use a soft cloth for smooth surfaces and a suitable suede brush for suede. Test any care product on a discreet area first." },
+ { number: "03", name: "Canvas & textiles", tone: "canvas", detail: "An easygoing texture for everyday dressing.", body: "Textile uppers bring a softer visual character to casual silhouettes. We use material descriptions to distinguish the look and feel of each style.", care: "Brush off dry dirt, then use a lightly damp cloth for small marks. Let the fabric dry naturally before wearing again." },
+ { number: "04", name: "Soles & finishing details", tone: "sole", detail: "The foundation of the whole silhouette.", body: "Sole shapes, trims, and panels give a shoe its distinctive profile. Check the product page for any specific construction or performance information.", care: "Wipe sole edges separately from delicate uppers. Avoid harsh cleaners, bleach, and direct heat." },
+];
+export default function MaterialsPage() {
+ return <AboutShell current="Materials" label="The details make the difference" title={<>Good design.<br /><em>Down to the details.</em></>} intro="Texture, colour, shape, and finish. Explore the materials you’ll encounter in footwear, along with a few practical ways to look after them.">
+  <div className="about-materials">{materials.map(m => <Reveal key={m.number}><section className="about-material-row"><div className={`about-material-swatch about-swatch-${m.tone}`} aria-hidden="true"><span>{m.number}</span><strong>{m.name}</strong></div><div><p className="section-label">The material palette / {m.number}</p><h2>{m.name}</h2><p className="about-material-detail">{m.detail}</p><p>{m.body}</p><details><summary>How to care for it</summary><p>{m.care}</p></details></div></section></Reveal>)}</div>
+  <Reveal><aside className="about-material-disclaimer"><h2>Always check your pair.</h2><p>This is a general materials guide, not a composition list for every SOLEA product. Use the material and care information supplied with your specific style as the final reference.</p></aside></Reveal>
+ </AboutShell>;
+}

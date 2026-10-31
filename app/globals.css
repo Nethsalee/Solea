@@ -974,8 +974,12 @@ h1, h2, h3, h4 {
 .catalog-reveal:not(.animate-fade-up) { opacity: 0; }
 .catalog-original-price { display: block; color: var(--text-muted); font-size: .75rem; font-weight: 400; }
 .catalog-sale-price { color: var(--accent-terra); }
-.collection-page-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-.collection-page-grid .category-card { height: clamp(320px, 40vw, 510px); }
+.collection-page-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.collection-page-grid .category-card { height: 320px; }
+.collection-page-grid .category-card-content { padding: 24px; }
+.collection-page-grid .category-card-title { font-size: clamp(1.8rem, 2.5vw, 2.4rem); }
+@media (max-width: 900px) { .collection-page-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .collection-page-grid .category-card { height: 280px; } }
 .catalog-end { border-top: 1px solid var(--border-medium); padding: 56px 0 72px; text-align: center; }
 .catalog-end p { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 2rem; margin-bottom: 20px; }
 .catalog-empty { padding: 70px 16px; text-align: center; }
@@ -1197,3 +1201,64 @@ h1, h2, h3, h4 {
 .kids-page .kids-fit { background: #e4eddf; border-radius: 24px; }
 @media (max-width: 800px) { .kids-playful-hero { grid-template-columns: 1fr; } .kids-playful-hero .kids-hero-photo { min-height: 400px; } .kids-playful-hero .kids-hero-photo > img { object-position: center 65%; } .kids-collection-picks { grid-template-columns: 1fr; } .kids-collection-tile h2 { margin-top: 20px; } .kids-collection-tile { padding: 24px; } }
 @media (max-width: 480px) { .kids-fun-strip { gap: 8px; } .kids-fun-strip > span:nth-child(even) { font-size: 1.2rem; } .kids-playful-hero .kids-hero-photo { min-height: 340px; } .kids-playful-hero .kids-hero-sticker { width: 86px; height: 86px; font-size: 1rem; } }
+
+/* About SOLEA */
+.about-heading { max-width: 940px; padding: 10px 0 44px; }
+.about-heading h1 { font-size: clamp(3rem, 6vw, 5.7rem); font-weight: 400; }
+.about-heading h1 em, .about-page h2 em { color: var(--accent-clay); font-weight: 400; }
+.about-heading > p:last-child { max-width: 600px; color: var(--text-muted); font-size: .94rem; line-height: 1.9; margin-top: 26px; }
+.about-nav { display: flex; flex-wrap: wrap; gap: 12px 36px; padding: 20px 0; border-block: 1px solid var(--border-medium); margin-bottom: 48px; }
+.about-nav a { display: flex; gap: 24px; font-size: .75rem; color: var(--text-muted); padding: 6px 0; }
+.about-nav a[aria-current="page"] { color: var(--accent-clay); font-weight: 600; }
+.about-nav a:hover { color: var(--text-dark); }
+.about-page h2 { font-size: clamp(2.2rem, 3.8vw, 3.6rem); font-weight: 400; }
+.about-story-hero { display: grid; grid-template-columns: 1.1fr 1fr; border-radius: 16px; overflow: hidden; background: var(--bg-warm); }
+.about-photo { position: relative; min-height: 540px; background: var(--bg-espresso); }
+.about-photo img { object-fit: contain; }
+.about-story-copy { padding: clamp(28px, 4vw, 56px); align-self: center; }
+.about-story-copy > p:not(.section-label) { color: var(--text-muted); font-size: .85rem; line-height: 1.9; margin: 22px 0; }
+.about-section { padding: 70px 0; }
+.about-section-heading { margin-bottom: 32px; }
+.about-section-heading h2 { font-size: clamp(2rem, 3vw, 2.8rem); }
+.about-three-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.about-note { height: 100%; padding: 30px 24px; border-top: 1px solid var(--border-medium); }
+.about-note > span, .about-download > span { color: var(--accent-clay); font-size: .65rem; letter-spacing: .14em; }
+.about-note h3 { font-size: 1.9rem; font-weight: 400; margin: 22px 0 16px; }
+.about-note p { color: var(--text-muted); font-size: .83rem; line-height: 1.9; }
+.about-statement { padding: clamp(30px, 5vw, 70px); background: #e3e7dc; border-radius: 16px; }
+.about-statement h2 { margin-bottom: 30px; }
+.about-statement > p:not(.section-label) { max-width: 740px; font-size: .9rem; color: var(--text-body); line-height: 1.9; margin-top: 20px; }
+.about-care-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; padding: 44px; background: var(--bg-warm); border-radius: 16px; }
+.about-care-panel ol { padding-left: 20px; font-size: .85rem; color: var(--text-muted); margin-bottom: 26px; }
+.about-care-panel li { padding-left: 8px; margin-bottom: 18px; }
+.about-materials { display: grid; gap: 40px; }
+.about-material-row { display: grid; grid-template-columns: .8fr 1.2fr; gap: 50px; align-items: center; padding-bottom: 40px; border-bottom: 1px solid var(--border-medium); }
+.about-material-swatch { min-height: 300px; padding: 28px; border-radius: 12px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; }
+.about-material-swatch > span { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 6rem; font-weight: 400; opacity: .45; line-height: 1; }
+.about-material-swatch strong { font-size: .8rem; text-transform: uppercase; letter-spacing: .16em; font-weight: 500; }
+.about-swatch-knit { background: repeating-linear-gradient(45deg, #dedbd2, #dedbd2 2px, #e7e4dc 2px, #e7e4dc 5px); }
+.about-swatch-leather { background: linear-gradient(135deg, #c9a57e, #9c7353); color: #fff5e7; }
+.about-swatch-canvas { background: repeating-linear-gradient(0deg, transparent, transparent 3px, #beb5a533 3px, #beb5a533 4px), repeating-linear-gradient(90deg, #e9dfcd, #e9dfcd 3px, #d8cdb9 3px, #d8cdb9 4px); }
+.about-swatch-sole { background: repeating-linear-gradient(120deg, #b9b7ac, #b9b7ac 12px, #c5c2b8 12px, #c5c2b8 16px); }
+.about-material-row > div:last-child > p:not(.section-label), .about-material-row details p { color: var(--text-muted); font-size: .85rem; line-height: 1.9; margin-top: 20px; }
+.about-material-row .about-material-detail { font-size: 1rem; color: var(--text-body); }
+.about-material-row details { margin-top: 26px; border-top: 1px solid var(--border-medium); padding-top: 18px; font-size: .8rem; }
+.about-material-row summary { cursor: pointer; }
+.about-material-disclaimer { padding: 30px; margin-top: 40px; background: var(--bg-warm); border-radius: 12px; }
+.about-material-disclaimer h2 { font-size: 1.8rem; }
+.about-material-disclaimer p { color: var(--text-muted); font-size: .8rem; margin-top: 16px; max-width: 760px; }
+.about-press-brand { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; }
+.about-wordmark { display: grid; place-items: center; background: var(--bg-espresso); color: var(--text-light); min-height: 350px; border-radius: 12px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(3.5rem, 7vw, 7rem); letter-spacing: .1em; }
+.about-press-brand p:not(.section-label) { margin: 24px 0; color: var(--text-muted); font-size: .86rem; line-height: 1.9; }
+.about-two-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.about-download { display: block; padding: 32px; background: var(--bg-warm); border: 1px solid var(--border-warm); border-radius: 12px; transition: transform var(--transition-base), box-shadow var(--transition-base); }
+.about-download:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+.about-download h3 { font-weight: 400; font-size: 2rem; margin: 22px 0; }
+.about-download p { color: var(--text-muted); font-size: .84rem; margin-bottom: 26px; }
+.about-download strong { font-size: .7rem; font-weight: 500; color: var(--accent-clay); }
+.about-press-edit { display: grid; grid-template-columns: 1.1fr 1fr; gap: 50px; align-items: center; padding: 40px; background: var(--bg-light); border-radius: 12px; }
+.about-press-edit > div:last-child > a { display: flex; justify-content: space-between; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--border-medium); font-size: .85rem; }
+.about-closing { text-align: center; padding: 72px 0; margin-top: 60px; border-top: 1px solid var(--border-medium); }
+.about-closing h2 { margin-bottom: 28px; }
+@media (max-width: 800px) { .about-story-hero, .about-care-panel, .about-material-row, .about-press-brand, .about-press-edit { grid-template-columns: 1fr; } .about-three-grid { grid-template-columns: 1fr; gap: 8px; } .about-photo { min-height: 390px; } .about-material-row { gap: 28px; } .about-press-brand { gap: 30px; } .about-care-panel, .about-press-edit { padding: 30px 24px; gap: 28px; } }
+@media (max-width: 640px) { .about-two-grid { grid-template-columns: 1fr; } .about-nav { gap: 12px 22px; } .about-nav a { gap: 10px; } .about-heading { padding-bottom: 30px; } .about-section { padding: 48px 0; } .about-material-swatch { min-height: 230px; } }

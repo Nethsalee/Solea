@@ -1,0 +1,11 @@
+import Link from "next/link";
+import AboutShell from "@/components/AboutShell";
+import Reveal from "@/components/Reveal";
+export const metadata = { title: "Press & Brand Resources | SOLEA", description: "SOLEA brand resources, collection references, and editorial information." };
+export default function PressPage() {
+ return <AboutShell current="Press" label="The SOLEA press room" title={<>A closer look<br /><em>at our world.</em></>} intro="An introduction to SOLEA for editors, stylists, and creative collaborators. Explore the brand, browse the collections, and download our basic brand resources.">
+  <Reveal><section className="about-press-brand"><div className="about-wordmark" aria-label="SOLEA">SOLEA</div><div><p className="section-label">At a glance</p><h2>Everyday movement.<br />Individual expression.</h2><p>SOLEA is a contemporary footwear concept with men’s, women’s, and kids’ edits. Its visual language brings warm neutrals, considered shapes, and playful accents together.</p><Link href="/our-story" className="btn-ghost">Read our story ↗</Link></div></section></Reveal>
+  <section className="about-section" aria-labelledby="brand-resources"><Reveal><div className="about-section-heading"><p className="section-label">For your reference</p><h2 id="brand-resources">Brand resources.</h2></div></Reveal><div className="about-two-grid"><Reveal><a href="/brand/solea-wordmark.svg" download className="about-download"><span>01 / SVG</span><h3>SOLEA wordmark</h3><p>A cream-and-espresso wordmark for brand reference.</p><strong>Download SVG ↓</strong></a></Reveal><Reveal delay={80}><a href="/brand/solea-overview.txt" download className="about-download"><span>02 / TEXT</span><h3>Brand overview</h3><p>A short introduction, collection list, and colour palette.</p><strong>Download overview ↓</strong></a></Reveal></div></section>
+  <Reveal><section className="about-press-edit"><div><p className="section-label">Explore the latest</p><h2>Stories start<br /><em>with a new perspective.</em></h2></div><div><Link href="/shop"><span>New Arrivals</span><span>↗</span></Link><Link href="/kids/play-club"><span>Kids / Play Club</span><span>↗</span></Link><Link href="/collections"><span>All Collections</span><span>↗</span></Link></div></section></Reveal>
+ </AboutShell>;
+}
