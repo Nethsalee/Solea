@@ -36,7 +36,7 @@ Replace the full placeholder values (no `your_` prefix should remain). Map `apiK
 1. Stop your dev server with Ctrl+C, then run `npm run dev` from the project directory. Environment changes require restarting Next.js.
 2. Open `http://localhost:3000/login` (or the port printed in the terminal).
 3. Choose Create an account, use an email you control, enter a password of at least 8 characters, confirm it, and submit.
-4. Confirm that the signed-in account view appears. Refresh to check session persistence.
+4. Confirm that you are redirected to the home page. Refresh, then open /login to check that your session is still signed in.
 5. In Firebase > Authentication > Users, check that the account appears.
 6. Sign out, then sign in again with the same credentials.
 7. Sign out, select Forgot password, enter your email, and check your inbox/spam folder. Follow the Firebase email link to set a new password; sign in with it.

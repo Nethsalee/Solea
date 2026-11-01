@@ -2,6 +2,7 @@
 import { useState, type FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FirebaseError } from "firebase/app";
 import { createUserWithEmailAndPassword, GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { firebaseConfigured, getFirebaseAuth } from "@/lib/firebase";
@@ -30,6 +31,7 @@ function errorMessage(error: unknown) {
   return messages[code] ?? "We couldn’t complete that request. Please try again.";
 }
 export default function LoginForm() {
+  const router = useRouter();
   const { user, loading, error: connectionError } = useAuth();
   const [mode, setMode] = useState<Mode>("login");
   const [email, setEmail] = useState("");
@@ -54,12 +56,13 @@ export default function LoginForm() {
       } else if (mode === "register") {
         await createUserWithEmailAndPassword(auth, email.trim(), password);
         setPassword(""); setConfirmation("");
-      } else { await signInWithEmailAndPassword(auth, email.trim(), password); setPassword(""); }
+        router.replace("/");
+      } else { await signInWithEmailAndPassword(auth, email.trim(), password); setPassword(""); router.replace("/"); }
     } catch (err) { setError(errorMessage(err)); } finally { setBusy(false); }
   }
   async function google() {
     setBusy(true); setError(""); setMessage("");
-    try { await signInWithPopup(getFirebaseAuth(), new GoogleAuthProvider()); }
+    try { await signInWithPopup(getFirebaseAuth(), new GoogleAuthProvider()); router.replace("/"); }
     catch (err) { setError(errorMessage(err)); } finally { setBusy(false); }
   }
   async function logout() {
@@ -70,7 +73,7 @@ export default function LoginForm() {
   return <div className="catalog-page auth-page"><div className="container"><Reveal><div className="auth-layout">
     <aside className="auth-story"><Image src="https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=1100&h=1400&fit=crop" alt="SOLEA everyday footwear in warm neutral tones" fill priority sizes="(max-width: 800px) 100vw, 45vw" /><div className="auth-story-copy"><p className="section-label">Your everyday, considered.</p><h2>Good to have<br /><em>you here.</em></h2><p>A fresh perspective.<br />A new favourite pair. Your next step.</p><Link href="/collections">Explore the collections ↗</Link></div></aside>
     <section className="auth-panel" aria-labelledby="auth-title"><Link href="/" className="auth-back">← Back to SOLEA</Link>
-      {loading ? <p role="status">Connecting to your account…</p> : user ? <><p className="section-label">Your SOLEA Account</p><h1 id="auth-title">You’re right<br /><em>at home.</em></h1><p className="auth-intro">Signed in as <strong>{user.email ?? user.displayName ?? "SOLEA member"}</strong>.</p><Link href="/shop" className="btn-primary">Explore New Arrivals ↗</Link><button className="auth-text-button auth-signout" disabled={busy} onClick={logout}>{busy ? "Signing out…" : "Sign out"}</button></> : <>
+      {loading ? <p role="status">Connecting to your account…</p> : user ? <><p className="section-label">Your SOLEA Account</p><h1 id="auth-title">You’re right<br /><em>at home.</em></h1><p className="auth-intro">Signed in as <strong>{user.email ?? user.displayName ?? "SOLEA member"}</strong>.</p><Link href="/" className="btn-primary">Go to Home ↗</Link><button className="auth-text-button auth-signout" disabled={busy} onClick={logout}>{busy ? "Signing out…" : "Sign out"}</button></> : <>
       <p className="section-label">{mode === "register" ? "Join SOLEA" : mode === "reset" ? "A fresh start" : "Welcome back"}</p><h1 id="auth-title">{mode === "register" ? <>Make yourself<br /><em>at home.</em></> : mode === "reset" ? <>Let’s get you<br /><em>back in.</em></> : <>Your next step<br /><em>starts here.</em></>}</h1><p className="auth-intro">{mode === "register" ? "Create your SOLEA account with your email and a password." : mode === "reset" ? "Enter your email and we’ll send you a link to reset your password." : "Sign in to your SOLEA account."}</p>
       <form onSubmit={submit} className="auth-form" aria-busy={busy}><fieldset disabled={busy || !firebaseConfigured || !!connectionError}>
         <label htmlFor="auth-email">Email address</label><input id="auth-email" type="email" autoComplete="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@example.com" required maxLength={254} />
