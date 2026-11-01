@@ -427,46 +427,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: "28px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "8px",
-          }}
-          aria-hidden="true"
-          className="hidden md:flex animate-fade-up delay-600"
-        >
-          <span style={{ fontSize: "0.6rem", fontWeight: 600, letterSpacing: "0.2em", color: "var(--text-faint)", textTransform: "uppercase" }}>
-            Scroll
-          </span>
-          <div
-            style={{
-              width: "22px",
-              height: "36px",
-              borderRadius: "11px",
-              border: "1.5px solid var(--border-medium)",
-              display: "flex",
-              justifyContent: "center",
-              paddingTop: "6px",
-            }}
-          >
-            <div
-              style={{
-                width: "3px",
-                height: "7px",
-                borderRadius: "2px",
-                background: "var(--accent-terra)",
-                animation: "float 1.6s ease-in-out infinite",
-              }}
-            />
-          </div>
-        </div>
       </section>
 
       {/* Warm divider */}
