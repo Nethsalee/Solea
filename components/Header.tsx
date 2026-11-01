@@ -52,11 +52,11 @@ export default function Header() {
           {/* Action Icons */}
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             {/* Search */}
-            <button className="nav-icon-btn" aria-label="Search">
+            <Link href="/search" className="nav-icon-btn" aria-label="Search products" onClick={() => setIsMenuOpen(false)}>
               <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
-            </button>
+            </Link>
 
             {/* Wishlist */}
             <button className="nav-icon-btn hidden md:flex" aria-label="Wishlist">
