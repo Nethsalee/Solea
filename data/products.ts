@@ -1,8 +1,11 @@
-import { Product } from "@/types";
+import type { Product } from "@/types";
+import { additionalProducts } from "./catalog-additions";
 
 export const products: Product[] = [
   {
     id: "aero-runner",
+    newArrival: true,
+    department: "men",
     name: "Aero Runner",
     slug: "aero-runner",
     category: "PERFORMANCE SERIES",
@@ -43,6 +46,8 @@ export const products: Product[] = [
   },
   {
     id: "cloud-one",
+    newArrival: true,
+    department: "women",
     name: "Cloud One",
     slug: "cloud-one",
     category: "STREET LIFESTYLE",
@@ -63,6 +68,8 @@ export const products: Product[] = [
   },
   {
     id: "urban-flex",
+    newArrival: true,
+    department: "men",
     name: "Urban Flex",
     slug: "urban-flex",
     category: "EVERYDAY ATHLETIC",
@@ -82,6 +89,8 @@ export const products: Product[] = [
   },
   {
     id: "motion-02",
+    newArrival: true,
+    department: "men",
     name: "Motion 02",
     slug: "motion-02",
     category: "CITY TECHNICAL",
@@ -101,6 +110,7 @@ export const products: Product[] = [
   },
   {
     id: "classic-low",
+    department: "women",
     name: "Classic Low",
     slug: "classic-low",
     category: "HERITAGE COURT",
@@ -123,6 +133,7 @@ export const products: Product[] = [
   },
   {
     id: "pace-knit",
+    department: "women",
     name: "Pace Knit",
     slug: "pace-knit",
     category: "SEAMLESS KNIT",
@@ -142,6 +153,7 @@ export const products: Product[] = [
   },
   {
     id: "sol-terra",
+    department: "women",
     name: "Sol Terra Court",
     slug: "sol-terra-court",
     category: "ATHLETIC DRAFT",
@@ -161,6 +173,7 @@ export const products: Product[] = [
   },
   {
     id: "nano-street",
+    department: "men",
     name: "Nano Street",
     slug: "nano-street",
     category: "URBAN SPORT",
@@ -178,6 +191,7 @@ export const products: Product[] = [
     rating: 4.4,
     reviewCount: 22,
   },
+  ...additionalProducts,
 ];
 
 export function getProductById(id: string): Product | undefined {

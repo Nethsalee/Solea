@@ -6,9 +6,9 @@ import ProductCard from "@/components/ProductCard";
 import Reveal from "@/components/Reveal";
 
 export const metadata = { title: "Search Footwear | SOLEA", description: "Search SOLEA footwear by name, collection, or colour.", robots: { index: false, follow: true } };
-const womenIds = new Set(["cloud-one", "classic-low", "pace-knit", "sol-terra"]);
+
 const catalog = [
-  ...products.map(p => ({ ...p, audience: womenIds.has(p.id) ? "women womens" : "men mens", href: `/product/${p.id}` })),
+  ...products.map(p => ({ ...p, audience: p.department === "women" ? "women womens" : "men mens", href: `/product/${p.id}` })),
   ...kidsProducts.map(p => ({ ...p, audience: "kids children junior", href: `/kids/${p.id}` })),
 ];
 const suggestedIds = ["aero-runner", "cloud-one", "hop-mini", "sunny-step"];

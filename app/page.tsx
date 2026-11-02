@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import ProductCard from "@/components/ProductCard";
+import { products } from "@/data/products";
 
 const featuredCategories = [
   {
@@ -26,86 +27,11 @@ const featuredCategories = [
   },
 ];
 
-const newArrivals = [
-  {
-    id: "aero-runner",
-    name: "Aero Runner",
-    category: "PERFORMANCE SERIES",
-    description: "Light Grey / Pure White",
-    price: 129,
-    colors: ["#e5e5e5", "#d4c5b0"],
-    image: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&h=600&fit=crop",
-    badge: "NEW DROP",
-  },
-  {
-    id: "cloud-one",
-    name: "Cloud One",
-    category: "STREET LIFESTYLE",
-    description: "Off-White / Sand Dunes",
-    price: 145,
-    colors: ["#f5f5dc", "#c2b280"],
-    image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&h=600&fit=crop",
-  },
-  {
-    id: "urban-flex",
-    name: "Urban Flex",
-    category: "EVERYDAY ATHLETIC",
-    description: "Chalk White / Alabaster",
-    price: 135,
-    colors: ["#f8f8f8", "#e8ddd0"],
-    image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&h=600&fit=crop",
-  },
-  {
-    id: "motion-02",
-    name: "Motion 02",
-    category: "CITY TECHNICAL",
-    description: "Charcoal / Stealth Black",
-    price: 119,
-    colors: ["#5c5248", "#2a2420"],
-    image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&h=600&fit=crop",
-  },
-];
-
-const bestSellers = [
-  {
-    id: "nano-street",
-    name: "Nano Street",
-    category: "URBAN SPORT",
-    description: "Cream / Stone Grey",
-    price: 115,
-    colors: ["#fffdd0", "#8b8680"],
-    image: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=600&h=600&fit=crop",
-  },
-  {
-    id: "classic-low",
-    name: "Classic Low",
-    category: "HERITAGE COURT",
-    description: "Natural Tanned Leather",
-    price: 125,
-    colors: ["#d2b48c", "#8b7355"],
-    image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=600&h=600&fit=crop",
-    badge: "BESTSELLER",
-  },
-  {
-    id: "pace-knit",
-    name: "Pace Knit",
-    category: "SEAMLESS KNIT",
-    description: "Stone Grey / Ice Cred",
-    price: 138,
-    colors: ["#918e85", "#c4b8a6"],
-    image: "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=600&h=600&fit=crop",
-  },
-  {
-    id: "sol-terra",
-    name: "Sol Terra Court",
-    category: "ATHLETIC DRAFT",
-    description: "Ecru / Raw Canvas",
-    price: 149,
-    colors: ["#c2a87a", "#e8dcc8"],
-    image: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=600&h=600&fit=crop",
-  },
-];
-
+const toCard = (product: (typeof products)[number]) => ({
+  ...product, image: product.images[0], colors: product.colors.map(c => c.hex),
+});
+const newArrivals = products.filter(p => p.newArrival).slice(-8).map(toCard);
+const bestSellers = [...products.filter(p => p.featured), ...products.filter(p => !p.featured)].slice(0, 8).map(toCard);
 const marqueeItems = [
   "Free Shipping Over $100",
   "New Collection 2026",
