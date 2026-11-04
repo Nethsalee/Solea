@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import ProductCard from "@/components/ProductCard";
-import { products } from "@/data/products";
+import { useCatalog } from "@/components/CatalogProvider";
+import type { Product } from "@/types";
 
 const featuredCategories = [
   {
@@ -27,11 +28,9 @@ const featuredCategories = [
   },
 ];
 
-const toCard = (product: (typeof products)[number]) => ({
+const toCard = (product: Product) => ({
   ...product, image: product.images[0], colors: product.colors.map(c => c.hex),
 });
-const newArrivals = products.filter(p => p.newArrival).slice(-8).map(toCard);
-const bestSellers = [...products.filter(p => p.featured), ...products.filter(p => !p.featured)].slice(0, 8).map(toCard);
 const marqueeItems = [
   "Free Shipping Over $100",
   "New Collection 2026",
@@ -120,6 +119,9 @@ function Counter({ target, suffix = "" }: { target: number | string; suffix?: st
 }
 
 export default function Home() {
+  const products = useCatalog().filter(p => p.department !== "kids");
+  const newArrivals = products.filter(p => p.newArrival).slice(-8).map(toCard);
+  const bestSellers = [...products.filter(p => p.featured), ...products.filter(p => !p.featured)].slice(0, 8).map(toCard);
   const [activeFilter, setActiveFilter] = useState("MEN");
   const filters = ["MEN", "WOMEN", "KIDS", "SALE"];
 

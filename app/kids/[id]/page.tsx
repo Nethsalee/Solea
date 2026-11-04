@@ -1,16 +1,14 @@
 import { notFound } from "next/navigation";
-import { kidsProducts } from "@/data/kids";
+import { getCatalog } from "@/lib/server/catalog";
 import KidsProduct from "@/components/KidsProduct";
-
-export function generateStaticParams() { return kidsProducts.map(p => ({ id: p.id })); }
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const product = kidsProducts.find(p => p.id === id);
+  const product = (await getCatalog()).find(p => p.id === id && p.department === "kids");
   return { title: product ? `${product.name} | SOLEA Kids` : "Style not found | SOLEA" };
 }
 export default async function KidsProductPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const product = kidsProducts.find(p => p.id === id);
+  const product = (await getCatalog()).find(p => p.id === id && p.department === "kids");
   if (!product) notFound();
-  return <KidsProduct product={product} />;
+  return <KidsProduct key={product.id} product={product} />;
 }

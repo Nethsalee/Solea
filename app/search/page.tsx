@@ -1,19 +1,16 @@
 import Link from "next/link";
-import { products } from "@/data/products";
-import { kidsProducts } from "@/data/kids";
+import { getCatalog } from "@/lib/server/catalog";
+
 import { searchProducts } from "@/lib/product-search";
 import ProductCard from "@/components/ProductCard";
 import Reveal from "@/components/Reveal";
 
 export const metadata = { title: "Search Footwear | SOLEA", description: "Search SOLEA footwear by name, collection, or colour.", robots: { index: false, follow: true } };
 
-const catalog = [
-  ...products.map(p => ({ ...p, audience: p.department === "women" ? "women womens" : "men mens", href: `/product/${p.id}` })),
-  ...kidsProducts.map(p => ({ ...p, audience: "kids children junior", href: `/kids/${p.id}` })),
-];
 const suggestedIds = ["aero-runner", "cloud-one", "hop-mini", "sunny-step"];
 
 export default async function SearchPage({ searchParams }: { searchParams: Promise<{ q?: string | string[] }> }) {
+  const catalog = (await getCatalog()).map(p => ({ ...p, audience: p.department === "kids" ? "kids children junior" : p.department === "women" ? "women womens" : "men mens", href: p.department === "kids" ? `/kids/${p.id}` : `/product/${p.id}` }));
   const params = await searchParams;
   const query = (typeof params.q === "string" ? params.q : params.q?.[0] ?? "").trim().slice(0, 150);
   const results = searchProducts(catalog, query);

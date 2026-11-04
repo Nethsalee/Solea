@@ -1,11 +1,12 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { products } from "@/data/products";
+import { useCatalog } from "./CatalogProvider";
 import ProductCard from "./ProductCard";
 import Reveal from "./Reveal";
 import { EditorialHero, EditorialStory } from "./CatalogEditorial";
 export default function Catalog({ sale = false, initialCategory = "", department }: { sale?: boolean; initialCategory?: string; department?: "men" | "women" }) {
+ const products = useCatalog().filter(p => p.department !== "kids");
  const source = department ? products.filter(p => p.department === department) : sale ? products.filter(p => p.salePrice !== undefined && p.salePrice < p.price) : (initialCategory ? products : products.filter(p => p.newArrival));
  const pageTitle = department === "men" ? "Men" : department === "women" ? "Women" : sale ? "Sale" : "New Arrivals";
  const label = department ? `${pageTitle}’s Footwear` : sale ? "The Archive Edit" : "Latest Drops · 2026";

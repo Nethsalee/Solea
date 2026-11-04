@@ -1,0 +1,8 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // This application uses the Next.js server API for database access.
+    // The Admin SDK uses IAM; request authorization is enforced in API routes.
+    match /{document=**} { allow read, write: if false; }
+  }
+}

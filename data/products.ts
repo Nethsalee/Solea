@@ -1,7 +1,8 @@
+import { withCatalogImages } from "./catalog-images";
 import type { Product } from "@/types";
 import { additionalProducts } from "./catalog-additions";
 
-export const products: Product[] = [
+const baseProducts: Product[] = [
   {
     id: "aero-runner",
     newArrival: true,
@@ -193,6 +194,8 @@ export const products: Product[] = [
   },
   ...additionalProducts,
 ];
+
+export const products: Product[] = baseProducts.map(withCatalogImages);
 
 export function getProductById(id: string): Product | undefined {
   return products.find((product) => product.id === id);

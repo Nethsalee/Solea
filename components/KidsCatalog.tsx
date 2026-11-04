@@ -2,11 +2,12 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { kidsProducts } from "@/data/kids";
+import { useCatalog } from "./CatalogProvider";
 import ProductCard from "./ProductCard";
 import Reveal from "./Reveal";
 
 export default function KidsCatalog({ playClub = false }: { playClub?: boolean }) {
+  const kidsProducts = useCatalog().filter(p => p.department === "kids");
   const [category, setCategory] = useState(playClub ? "PLAY CLUB" : "");
   const [size, setSize] = useState("");
   const [sort, setSort] = useState("featured");

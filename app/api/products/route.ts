@@ -1,22 +1,11 @@
-import { NextResponse } from "next/server";
-import { products } from "@/data/products";
-
+import { getCatalog } from "@/lib/server/catalog";
+import { apiFailure } from "@/lib/server/auth";
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const category = searchParams.get("category");
-  const featured = searchParams.get("featured");
-
-  let filteredProducts = products;
-
-  if (category) {
-    filteredProducts = filteredProducts.filter(
-      (p) => p.category.toLowerCase() === category.toLowerCase()
-    );
-  }
-
-  if (featured === "true") {
-    filteredProducts = filteredProducts.filter((p) => p.featured);
-  }
-
-  return NextResponse.json(filteredProducts);
+  try {
+    const params = new URL(request.url).searchParams;
+    const items = (await getCatalog()).filter(p => (!params.get("category") || p.category.toLowerCase() === params.get("category")!.toLowerCase()) && (!params.get("department") || p.department === params.get("department")) && (params.get("featured") !== "true" || p.featured));
+    return Response.json(items, { headers: { "Cache-Control": "no-store" } });
+  } catch (error) { return apiFailure(error); }
 }

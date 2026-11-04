@@ -14,7 +14,7 @@ export interface Product {
   badge?: string;
   inStock: boolean;
   featured?: boolean;
-  department?: "men" | "women";
+  department?: "men" | "women" | "kids";
   newArrival?: boolean;
   rating?: number;
   reviewCount?: number;

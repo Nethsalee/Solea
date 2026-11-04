@@ -3,7 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Product } from "@/types";
-import { products } from "@/data/products";
+import { useCatalog } from "./CatalogProvider";
 import { useCart } from "@/hooks/useCart";
 import ProductCard from "./ProductCard";
 import Reveal from "./Reveal";
@@ -18,6 +18,7 @@ export default function ProductDetails({ product }: { product: Product }) {
   const { addItem } = useCart();
   const price = product.salePrice ?? product.price;
   const department = product.department ?? "men";
+  const products = useCatalog();
   const related = products.filter(p => p.id !== product.id && p.department === department).slice(0, 4);
   function add() {
     if (!size) { setError("Please choose an EU size first."); return; }

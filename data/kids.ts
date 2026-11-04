@@ -1,7 +1,8 @@
+import { withCatalogImages } from "./catalog-images";
 import type { Product } from "@/types";
 import { additionalKids } from "./catalog-additions";
 
-export const kidsProducts: Product[] = [
+const baseKidsProducts: Product[] = [
   { id: "hop-mini", slug: "hop-mini", name: "Hop Mini", category: "PLAY CLUB", description: "Mint / Cream", price: 58, images: ["/images/kids-hop-sneaker.png"], colors: [{ name: "Mint", value: "mint", hex: "#a8cdb4" }, { name: "Cream", value: "cream", hex: "#f4eedc" }], sizes: ["24", "25", "26", "27", "28", "29", "30"], badge: "NEW COLLECTION", inStock: true },
   { id: "sunny-step", slug: "sunny-step", name: "Sunny Step", category: "PLAY CLUB", description: "Butter Yellow / Peach", price: 64, images: ["/images/kids-sunny-sneaker.png"], colors: [{ name: "Butter Yellow", value: "butter", hex: "#f4df8c" }, { name: "Peach", value: "peach", hex: "#efb59a" }], sizes: ["26", "27", "28", "29", "30", "31", "32", "33", "34"], badge: "NEW COLLECTION", inStock: true },
   { id: "mini-runner", slug: "mini-runner", name: "Mini Runner", category: "PLAYTIME", description: "Cloud White / Sky Blue", price: 65, images: ["https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=900&h=900&fit=crop"], colors: [{ name: "Cloud White", value: "cloud-white", hex: "#eeeae2" }, { name: "Sky Blue", value: "sky-blue", hex: "#9cbac9" }], sizes: ["24", "25", "26", "27", "28", "29", "30"], badge: "NEW", inStock: true },
@@ -10,3 +11,5 @@ export const kidsProducts: Product[] = [
   { id: "weekend-mini", slug: "weekend-mini", name: "Weekend Mini", category: "EVERYDAY", description: "Oat / Stone", price: 62, images: ["https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=900&h=900&fit=crop"], colors: [{ name: "Oat", value: "oat", hex: "#d8ccb6" }, { name: "Stone", value: "stone", hex: "#9e9488" }], sizes: ["27", "28", "29", "30", "31", "32", "33", "34"], inStock: true },
   ...additionalKids,
 ];
+
+export const kidsProducts: Product[] = baseKidsProducts.map(withCatalogImages);
