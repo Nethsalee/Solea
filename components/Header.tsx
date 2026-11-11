@@ -21,8 +21,20 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    if (!isMenuOpen) return;
+    const desktop = window.matchMedia("(min-width: 48rem)");
+    const previousOverflow = document.body.style.overflow;
+    const closeOnDesktop = () => {
+      if (desktop.matches) setIsMenuOpen(false);
+    };
+
+    document.body.style.overflow = "hidden";
+    desktop.addEventListener("change", closeOnDesktop);
+    closeOnDesktop();
+    return () => {
+      desktop.removeEventListener("change", closeOnDesktop);
+      document.body.style.overflow = previousOverflow;
+    };
   }, [isMenuOpen]);
 
   const navLinks = [
@@ -87,7 +99,7 @@ export default function Header() {
 
             {/* Mobile Menu Toggle */}
             <button
-              className="nav-icon-btn md:hidden"
+              className="nav-icon-btn mobile-menu-toggle"
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMenuOpen}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
