@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useAuth } from "./AuthProvider";
+import { useWishlist } from "@/hooks/useWishlist";
 
 export default function Header() {
   const { user } = useAuth();
+  const { count: favoriteCount } = useWishlist();
   const accountHref = user ? "/profile" : "/login?next=profile";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -51,7 +53,7 @@ export default function Header() {
           </nav>
 
           {/* Action Icons */}
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <div className="nav-actions">
             {/* Search */}
             <Link href="/search" className="nav-icon-btn" aria-label="Search products" onClick={() => setIsMenuOpen(false)}>
               <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -59,13 +61,12 @@ export default function Header() {
               </svg>
             </Link>
 
-            {/* Wishlist */}
-            <button className="nav-icon-btn hidden md:flex" aria-label="Wishlist">
+            <Link href="/favorites" className="nav-icon-btn" aria-label={`Favorites (${favoriteCount})`} onClick={() => setIsMenuOpen(false)}>
               <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
               </svg>
-              <span className="nav-badge">0</span>
-            </button>
+              {favoriteCount > 0 && <span className="nav-badge" aria-hidden="true">{favoriteCount > 99 ? "99+" : favoriteCount}</span>}
+            </Link>
 
             {/* Cart */}
             <button className="nav-icon-btn" aria-label="Shopping cart">

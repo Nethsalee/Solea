@@ -6,6 +6,7 @@ import type { Product } from "@/types";
 import { useCatalog } from "./CatalogProvider";
 import { useCart } from "@/hooks/useCart";
 import ProductCard from "./ProductCard";
+import FavoriteButton from "./FavoriteButton";
 import Reveal from "./Reveal";
 
 export default function ProductDetails({ product }: { product: Product }) {
@@ -31,7 +32,7 @@ export default function ProductDetails({ product }: { product: Product }) {
     <section className="kids-product-info"><p className="section-label">{product.category}</p><h1>{product.name}</h1><p className="kids-product-price">${price}{product.salePrice !== undefined && <del className="detail-original">${product.price}</del>}</p><p>{product.description}</p>
     <fieldset className="detail-colours"><legend>Colour: {colour.name}</legend>{product.colors.map(c => <button key={c.value} style={{ backgroundColor: c.hex }} aria-label={c.name} aria-pressed={colour.value === c.value} onClick={() => { setColour(c); setMessage(""); }} />)}</fieldset>
     <fieldset className="kids-sizes"><legend>Choose size (EU)</legend>{product.sizes.map(s => <button key={s} aria-pressed={size === s} onClick={() => { setSize(s); setError(""); setMessage(""); }}>{s}</button>)}</fieldset>
-    <label className="detail-quantity">Quantity<select value={quantity} onChange={e => { setQuantity(Number(e.target.value)); setMessage(""); }}>{Array.from({ length: 10 }, (_, i) => <option key={i + 1}>{i + 1}</option>)}</select></label><button className="btn-primary kids-add" onClick={add}>Add to bag — ${price * quantity} ↗</button>{error && <p role="alert">{error}</p>}{message && <p role="status">{message}</p>}
+    <label className="detail-quantity">Quantity<select value={quantity} onChange={e => { setQuantity(Number(e.target.value)); setMessage(""); }}>{Array.from({ length: 10 }, (_, i) => <option key={i + 1}>{i + 1}</option>)}</select></label><button className="btn-primary kids-add" onClick={add}>Add to bag — ${price * quantity} ↗</button><FavoriteButton id={product.id} name={product.name} />{error && <p role="alert">{error}</p>}{message && <p role="status">{message}</p>}
     <details open><summary>About this style</summary>{product.details?.features?.length ? <ul className="detail-features">{product.details.features.map(f => <li key={f}>{f}</li>)}</ul> : <p>{product.name} is part of the SOLEA {product.category.toLowerCase()} edit. Available in EU sizes {product.sizes[0]}–{product.sizes.at(-1)}.</p>}</details>
     <details><summary>Materials & care</summary>{product.details?.materials.map(m => <p key={m}>{m}</p>)}{(product.details?.careInstructions ?? ["Gently wipe away surface dirt and air dry away from direct heat."]).map(c => <p key={c}>{c}</p>)}<Link href="/materials" className="kids-fit-link">Explore the materials guide ↗</Link></details>
     <Link href={`/${department}`} className="kids-fit-link">← Back to the {department === "women" ? "women’s" : "men’s"} edit</Link></section></div></Reveal>

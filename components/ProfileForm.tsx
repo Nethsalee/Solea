@@ -68,6 +68,7 @@ function ProfileDetails({ user }: { user: User }) {
           </button>
         </fieldset>
       </form>
+      <Link href="/favorites" className="btn-ghost profile-favorites">My favorites ↗</Link>
       <button type="button" className="auth-text-button auth-signout" onClick={logout} disabled={!!pending}>
         {pending === "signout" ? "Signing out…" : "Sign out"}
       </button>

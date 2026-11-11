@@ -1,58 +1,69 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useMemo, useSyncExternalStore } from "react";
 
-const WISHLIST_STORAGE_KEY = "solea_wishlist";
+const storageKey = "solea_wishlist";
+const listeners = new Set<() => void>();
+let temporarySnapshot: string | undefined;
+
+function getSnapshot() {
+  if (temporarySnapshot !== undefined) return temporarySnapshot;
+  try {
+    return window.localStorage.getItem(storageKey) ?? "[]";
+  } catch {
+    return "[]";
+  }
+}
+
+function subscribe(listener: () => void) {
+  listeners.add(listener);
+  const onStorage = (event: StorageEvent) => {
+    if (event.key === storageKey || event.key === null) listener();
+  };
+  window.addEventListener("storage", onStorage);
+  return () => {
+    listeners.delete(listener);
+    window.removeEventListener("storage", onStorage);
+  };
+}
+
+function parseWishlist(snapshot: string | null): string[] {
+  try {
+    const items: unknown = JSON.parse(snapshot ?? "[]");
+    if (Array.isArray(items)) {
+      return [...new Set(items.filter((id): id is string => typeof id === "string" && id.length > 0))];
+    }
+  } catch {
+    // Ignore invalid saved data.
+  }
+  return [];
+}
+
+function updateWishlist(update: (items: string[]) => string[]) {
+  const snapshot = JSON.stringify(update(parseWishlist(getSnapshot())));
+  try {
+    window.localStorage.setItem(storageKey, snapshot);
+    temporarySnapshot = undefined;
+  } catch {
+    temporarySnapshot = snapshot;
+  }
+  listeners.forEach(listener => listener());
+}
 
 export function useWishlist() {
-  const [wishlist, setWishlist] = useState<string[]>([]);
-
-  // Load wishlist from localStorage on mount
-  useEffect(() => {
-    const savedWishlist = localStorage.getItem(WISHLIST_STORAGE_KEY);
-    if (savedWishlist) {
-      setWishlist(JSON.parse(savedWishlist));
-    }
-  }, []);
-
-  // Save wishlist to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem(WISHLIST_STORAGE_KEY, JSON.stringify(wishlist));
-  }, [wishlist]);
-
-  const addToWishlist = (productId: string) => {
-    if (!wishlist.includes(productId)) {
-      setWishlist([...wishlist, productId]);
-    }
-  };
-
-  const removeFromWishlist = (productId: string) => {
-    setWishlist(wishlist.filter((id) => id !== productId));
-  };
-
-  const toggleWishlist = (productId: string) => {
-    if (wishlist.includes(productId)) {
-      removeFromWishlist(productId);
-    } else {
-      addToWishlist(productId);
-    }
-  };
-
-  const isInWishlist = (productId: string) => {
-    return wishlist.includes(productId);
-  };
-
-  const clearWishlist = () => {
-    setWishlist([]);
-  };
+  const snapshot = useSyncExternalStore(subscribe, getSnapshot, () => null);
+  const wishlist = useMemo(() => parseWishlist(snapshot), [snapshot]);
 
   return {
     wishlist,
-    addToWishlist,
-    removeFromWishlist,
-    toggleWishlist,
-    isInWishlist,
-    clearWishlist,
+    ready: snapshot !== null,
     count: wishlist.length,
+    isInWishlist: (id: string) => wishlist.includes(id),
+    addToWishlist: (id: string) => updateWishlist(items => items.includes(id) ? items : [...items, id]),
+    removeFromWishlist: (id: string) => updateWishlist(items => items.filter(item => item !== id)),
+    toggleWishlist: (id: string) => updateWishlist(items =>
+      items.includes(id) ? items.filter(item => item !== id) : [...items, id]
+    ),
+    clearWishlist: () => updateWishlist(() => []),
   };
 }

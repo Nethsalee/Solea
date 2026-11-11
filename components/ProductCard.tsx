@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import FavoriteButton from "./FavoriteButton";
 
 interface ProductCardProps {
   id: string;
@@ -29,7 +30,8 @@ export default function ProductCard({
   href,
 }: ProductCardProps) {
   return (
-    <Link href={href ?? `/product/${id}`} className="product-card" aria-label={`${name} - $${salePrice ?? price}`}>
+    <div className="product-card">
+      <Link href={href ?? `/product/${id}`} className="product-card-link" aria-label={`${name} - $${salePrice ?? price}`} />
       {/* Image Container */}
       <div className="product-image-wrapper">
         {badge && (
@@ -38,20 +40,7 @@ export default function ProductCard({
           </span>
         )}
 
-        <button
-          className="product-wishlist-btn"
-          aria-label={`Add ${name} to wishlist`}
-          onClick={(e) => { e.preventDefault(); }}
-        >
-          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-            />
-          </svg>
-        </button>
+        <FavoriteButton id={id} name={name} compact />
 
         <Image
           src={image}
@@ -93,6 +82,6 @@ export default function ProductCard({
           ))}
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
