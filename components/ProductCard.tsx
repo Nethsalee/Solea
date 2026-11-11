@@ -29,9 +29,10 @@ export default function ProductCard({
   badge,
   href,
 }: ProductCardProps) {
+  const productHref = href ?? `/product/${id}`;
   return (
     <div className="product-card">
-      <Link href={href ?? `/product/${id}`} className="product-card-link" aria-label={`${name} - $${salePrice ?? price}`} />
+      <Link href={productHref} className="product-card-link" aria-label={`${name} - $${salePrice ?? price}`} />
       {/* Image Container */}
       <div className="product-image-wrapper">
         {badge && (
@@ -50,13 +51,13 @@ export default function ProductCard({
           className="product-img"
         />
 
-        <button
+        <Link
+          href={`${productHref}#product-options`}
           className="product-quick-add"
-          onClick={(e) => { e.preventDefault(); }}
-          aria-label={`Quick add ${name} to cart`}
+          aria-label={`Choose a size for ${name}`}
         >
-          + Quick Add
-        </button>
+          Choose size
+        </Link>
       </div>
 
       {/* Product Info */}

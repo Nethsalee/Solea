@@ -4,10 +4,12 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useAuth } from "./AuthProvider";
 import { useWishlist } from "@/hooks/useWishlist";
+import { useCart } from "@/hooks/useCart";
 
 export default function Header() {
   const { user } = useAuth();
   const { count: favoriteCount } = useWishlist();
+  const { itemCount } = useCart();
   const accountHref = user ? "/profile" : "/login?next=profile";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -69,12 +71,12 @@ export default function Header() {
             </Link>
 
             {/* Cart */}
-            <button className="nav-icon-btn" aria-label="Shopping cart">
+            <Link href="/cart" className="nav-icon-btn" aria-label={`Shopping cart (${itemCount})`} onClick={() => setIsMenuOpen(false)}>
               <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
               </svg>
-              <span className="nav-badge">0</span>
-            </button>
+              {itemCount > 0 && <span className="nav-badge" aria-hidden="true">{itemCount > 99 ? "99+" : itemCount}</span>}
+            </Link>
 
             {/* Account */}
             <Link href={accountHref} className="nav-icon-btn" aria-label={user ? "My profile" : "Sign in to your profile"}>
